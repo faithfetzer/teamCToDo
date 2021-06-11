@@ -3,9 +3,20 @@
 // post (new item)
 // put (update)
 // delete
+<<<<<<< HEAD
 // const middleware = require('../middleware');
 const { DataTypes } = require('sequelize');
 const db = require('../db')
+=======
+// endpoints: 
+// SITE/list/
+// SITE/list/create
+// SITE/list/update
+// SITE/list/delete
+const { DataTypes } = require('sequelize');
+const db = require('../db')
+
+>>>>>>> e263289235120d0419deac7530027255ee643181
 const Express = require('express');
 const { ListModel } = require('../models');
 const router = Express.Router();
@@ -44,15 +55,4 @@ router.get('/practice', (req, res) => {
 
 })
 
-
-
-
-
-
-
 module.exports = router
-// endpoints: 
-// SITE/list/
-// SITE/list/create
-// SITE/list/post
-// SITE/list/delete
