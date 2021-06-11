@@ -44,6 +44,49 @@ router.post('/create', async (req, res) => {
     // ListModel.create(listEntry)
 })
 
+/* 
+==================================================
+Get all Lists
+==================================================
+*/
+
+router.get('/', async (req, res) => {
+    try {
+        const entries = await ListModel.findAll();
+        res.status(200).json(entries);
+    } catch (err) {
+        res.status(500).json({error: err})
+    }
+})
+
+/* 
+===============================================
+Get List by User (make later not now)
+===============================================
+*/
+
+// router.get('/mine', validateJWT, async (req, res) => {
+//     let { id } = req.user;
+//     try {
+//         const userList = await ListModel.findAll({
+//             where: {
+//                 owner: id
+//             }
+//         });
+//         res.status(200).json(userList);
+//     } catch (err) {
+//         res.status(500).json({error: err})
+//     }
+// })
+
+
+
+
+
+
+
+
+
 router.get('/practice', (req, res) => {
     res.send('Hey!')
 
