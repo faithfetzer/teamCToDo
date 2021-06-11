@@ -14,6 +14,7 @@ const { DataTypes } = require('sequelize');
 const db = require('../db')
 const Express = require('express');
 const { ListModel } = require('../models');
+const validateJWT = require('../middleware/validateSession');
 const router = Express.Router();
 
 /* 
@@ -22,7 +23,7 @@ const router = Express.Router();
 ===============================
 */
 
-router.post('/create', async (req, res) => {
+router.post('/create',  validateJWT, async (req, res) => {
     const {name, date, timedue, description, duration} = req.body;
     //const {id} = req.user;
     const listEntry = {
@@ -75,6 +76,65 @@ Get List by User (make later not now)
 //             }
 //         });
 //         res.status(200).json(userList);
+//     } catch (err) {
+//         res.status(500).json({error: err})
+//     }
+// })
+
+/* 
+==============================
+    Update the List (something )
+==============================
+*/
+// router.put('/update/:entryId', validateJWT, async (req, res) => {
+//     const {name, date, timedue, description, duration, completed} = req.body.list;
+//     const listId = req.params.entryId;
+//     const userId = req.user.id;
+
+//     const query = {
+//         where: {
+//             id: listId,
+//             owner: userId
+//         }
+//     }
+
+//     const updateList = {
+//         name: name,
+//         date: date,
+//         timedue: timedue,
+//         description: description,
+//         duration: duration,
+//         completed: completed
+//     };
+
+//     try {
+//         const update = await ListModel.update(updateList, query);
+//         res.status(200).json(update);
+//     } catch (err) {
+//         res.status(500).json({error: err})
+//     }
+
+// })
+
+/* 
+=========================================
+    Delete a List
+=========================================
+*/
+// router.delete('/delete/:id', validateJWT, async (req, res) => {
+//     const ownerId = req.user.id;
+//     const listId = req.params.id;
+
+//     try {
+//         const query = {
+//             where: {
+//                 id: listId,
+//                 owner: ownerId
+//             }
+//         };
+
+//         await ListModel.destroy(query);
+//         res.status(200).json({ msg: "List has been Removed"});
 //     } catch (err) {
 //         res.status(500).json({error: err})
 //     }
