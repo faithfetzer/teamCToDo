@@ -7,5 +7,5 @@
 // endpoints: 
 // SITE/list/
 // SITE/list/create
-// SITE/list/post
+// SITE/list/update
 // SITE/list/delete
