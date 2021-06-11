@@ -7,7 +7,5 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
         ssl: true
     }});
 
-// const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
-
 
 module.exports = sequelize;
