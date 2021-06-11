@@ -26,16 +26,16 @@ const List = db.define("list", {
   completed: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    set(value){this.setDataValue(false)}
+    //set(value){this.setDataValue(false)}
   },
   important: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    set(value){this.setDataValue(false)}
+    //set(value){this.setDataValue(false)}
   },
-  owner_id: {
-    type: DataTypes.INTEGER,
-  },
+//   owner_id: {
+//     type: DataTypes.INTEGER,
+//   },
 });
  
 
