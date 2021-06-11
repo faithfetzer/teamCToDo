@@ -1,4 +1,5 @@
 // validate session using jwt
+require("dotenv").config;
 const jwt = require("jsonwebtoken");
 const { UserModel } = require("../models");
 
