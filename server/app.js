@@ -1,11 +1,17 @@
- require('dotenv').config();
+require('dotenv').config();
 const Express = require('express');
 const app = Express();
+
 const dbConnection = require('./db');
+
 app.use(Express.json());
+
 const controllers = require('./controllers');
-// const middleware =require('./middleware');
-// app.use(middleware.headers);
+
+
+app.use(require('./middleware/headers'));
+app.use(require('./middleware/validateSession'));
+
 app.use('/list', controllers.listController);
 app.use('/user', controllers.userController)
 
