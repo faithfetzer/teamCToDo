@@ -3,11 +3,7 @@
 // post (new item)
 // put (update)
 // delete
-<<<<<<< HEAD
 // const middleware = require('../middleware');
-const { DataTypes } = require('sequelize');
-const db = require('../db')
-=======
 // endpoints: 
 // SITE/list/
 // SITE/list/create
@@ -15,8 +11,6 @@ const db = require('../db')
 // SITE/list/delete
 const { DataTypes } = require('sequelize');
 const db = require('../db')
-
->>>>>>> e263289235120d0419deac7530027255ee643181
 const Express = require('express');
 const { ListModel } = require('../models');
 const router = Express.Router();
