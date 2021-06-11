@@ -13,13 +13,13 @@ const User = db.define('user', {
     },
     email: {
         type: DataTypes.STRING(100),
-        validate:{ isEmail: true},
+        // validate:{ isEmail: true},
         allowNull: false,
         unique: true
     },
     password: {
         type: DataTypes.STRING(),
-        validate: {len: [5, 100]},
+        // validate: {len: [5, 100]},
         allowNull: false
     }
 })
