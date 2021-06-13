@@ -33,10 +33,9 @@ const List = db.define("list", {
     allowNull: false,
     //set(value){this.setDataValue(false)}
   },
-//   owner_id: {
-//     type: DataTypes.INTEGER,
-//   },
+  owner_id: {
+    type: DataTypes.INTEGER,
+  },
 });
- 
 
 module.exports = List;

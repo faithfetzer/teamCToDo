@@ -34,7 +34,7 @@ router.post('/create',  validateJWT, async (req, res) => {
         duration: duration,
         completed: false,
         important: false,
-        owner_id
+        owner_id: id
     }
     try {
         const newList = await ListModel.create(listEntry);
@@ -67,19 +67,19 @@ Get List by User (make later not now)
 ===============================================
 */
 
- router.get('/mine', validateJWT, async (req, res) => {
+router.get('/mine', validateJWT, async (req, res) => {
     let { id } = req.user;
-     try {
-         const userList = await ListModel.findAll({
+    try {
+        const userList = await ListModel.findAll({
             where: {
-               owner_id: id
-         }
-       });
-         res.status(200).json(userList);
+            owner_id: id
+        }
+        });
+        res.status(200).json(userList);
     } catch (err) {
-       res.status(500).json({error: err})
+        res.status(500).json({error: err})
     }
- })
+})
 
 /* 
 ==============================
