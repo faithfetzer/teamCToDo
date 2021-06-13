@@ -12,10 +12,10 @@ const List = db.define("list", {
     allowNull: false,
   },
   date: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.DATEONLY,
   },
   timedue: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.TIME,
   },
   description: {
     type: DataTypes.STRING,
@@ -26,12 +26,10 @@ const List = db.define("list", {
   completed: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    //set(value){this.setDataValue(false)}
   },
   important: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    //set(value){this.setDataValue(false)}
   },
   owner_id: {
     type: DataTypes.INTEGER,
