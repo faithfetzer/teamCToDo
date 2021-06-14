@@ -185,6 +185,31 @@ router.get('/completed', validateJWT, async (req, res) => {
     }
 })
 
+/* 
+=========================================
+    Sort by Completed
+=========================================
+*/
+
+router.get('/completed', validateJWT, async (req, res) => {
+    let { id } = req.user;
+    try {
+        const userCompleted = await ListModel.findAll({
+            where: {
+            owner_id: id,
+            completed: true
+        }
+        });
+        res.status(200).json({
+            msg: `here are completed items`,
+            userCompleted
+        })
+    } catch (err) {
+        res.status(500).json({error: err})
+    }
+})
+
+
 
 
 
