@@ -6,10 +6,10 @@
 // const middleware = require('../middleware');
 
 // endpoints: 
-// SITE/list/
-// SITE/list/create
-// SITE/list/update
-// SITE/list/delete
+// SITE/list/ //!Done
+// SITE/list/create //!Done
+// SITE/list/update//!Done
+// SITE/list/delete//!Done
 const { DataTypes } = require('sequelize');
 const db = require('../db')
 const Express = require('express');
