@@ -6,7 +6,6 @@ const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
 
 
 
-
 // const sequelize = new Sequelize(process.env.DATABASE_URL, {
 //     dialect: 'postgres',
 //     ssl: process.env.ENVIRONMENT === 'production'
@@ -20,14 +19,12 @@ const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
 // })
 
 
-// const sequelize = new Sequelize(process.env.DATABASE_URL);
-
-
 // const sequelize = new Sequelize(process.env.DATABASE_URL, {
 //     dialect: 'postgres',
 //     dialectOptions: {
 //         ssl: true
 //     }});
+
 
 
 
