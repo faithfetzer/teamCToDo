@@ -2,7 +2,7 @@ const router = require("express").Router();
 const {UserModel} = require("../models");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { UniqueConstraintError } = require('sequelize');
+const { UniqueConstraintError, ValidationError } = require('sequelize');
 
 // build user components
 // signup
@@ -15,6 +15,7 @@ const { UniqueConstraintError } = require('sequelize');
 
 router.post('/register', async (req, res) => {
     let {firstName, lastName, email, password} = req.body
+    console.log(req.body)
     try{
         const user = await UserModel.create({
             firstName:firstName,
@@ -39,6 +40,11 @@ router.post('/register', async (req, res) => {
             res.status(409).json({
                 msg: `Email already in use`
             });
+        } else if(err instanceof ValidationError){
+            res.status(409).json({
+                msg: `email or password incorrect format`,
+                err
+            })
         } else {
             res.status(500).json({
                 error: `Failed to register user: ${err}`

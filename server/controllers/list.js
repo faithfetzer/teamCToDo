@@ -34,13 +34,15 @@ router.post('/create',  validateJWT, async (req, res) => {
         duration: duration,
         completed: false,
         important: false,
-        owner_id
+        owner_id: id
     }
+    // console.log(req.user.id, req.body, listEntry)
     try {
         const newList = await ListModel.create(listEntry);
         res.status(200).json(newList);
     }
     catch(err) {
+        console.log(err)
         res.status(500).json({error: err})
     }
     // ListModel.create(listEntry)
@@ -52,92 +54,93 @@ Get all Lists
 ==================================================
 */
 
-router.get('/', async (req, res) => {
-    try {
-        const entries = await ListModel.findAll();
-        res.status(200).json(entries);
-    } catch (err) {
-        res.status(500).json({error: err})
-    }
-})
+// router.get('/', async (req, res) => {
+//     try {
+//         const entries = await ListModel.findAll();
+//         res.status(200).json(entries);
+//     } catch (err) {
+//         res.status(500).json({error: err})
+//     }
+// })
 
+// commented this out and changed endpint for the get lsit by user, because we don't want anyone to be able to have an endpoint where they can see lists that arent theirs- FF
 /* 
 ===============================================
 Get List by User (make later not now)
 ===============================================
 */
 
- router.get('/mine', validateJWT, async (req, res) => {
+router.get('/', validateJWT, async (req, res) => {
     let { id } = req.user;
-     try {
-         const userList = await ListModel.findAll({
+    try {
+        const userList = await ListModel.findAll({
             where: {
-               owner_id: id
-         }
-       });
-         res.status(200).json(userList);
+            owner_id: id,
+        }
+        });
+        res.status(200).json(userList);
     } catch (err) {
-       res.status(500).json({error: err})
+        res.status(500).json({error: err})
     }
- })
+})
 
 /* 
 ==============================
     Update the List (something )
 ==============================
 */
- router.put('/update/:entryId', validateJWT, async (req, res) => {
-     const {name, date, timedue, description, duration, completed} = req.body.list;
-     const listId = req.params.entryId;
-     const userId = req.user.id;
+router.put('/update/:entryId', validateJWT, async (req, res) => {
+    const {name, date, timedue, description, duration, completed} = req.body;
+    const listId = req.params.entryId;
+    const userId = req.user.id;
 
-     const query = {
-         where: {
+    const query = {
+        where: {
             id: listId,
-             owner: userId
+            owner_id: userId
         }
-     }
+    }
 
-     const updateList = {
-         name: name,
-         date: date,
-         timedue: timedue,
-         description: description,
-         duration: duration,
-         completed: completed
-     };
-   try {
-         const update = await ListModel.update(updateList, query);
-         res.status(200).json(update);
-     } catch (err) {
+    const updateList = {
+        name: name,
+        date: date,
+        timedue: timedue,
+        description: description,
+        duration: duration,
+        completed: completed
+    };
+    try {
+        const update = await ListModel.update(updateList, query);
+        res.status(200).json(update);
+    } catch (err) {
         res.status(500).json({error: err})
-     }
+    }
 
- })
+})
 
 /* 
 =========================================
     Delete a List
 =========================================
 */
- router.delete('/delete/:id', validateJWT, async (req, res) => {
-     const ownerId = req.user.id;
-     const listId = req.params.id;
+router.delete('/delete/:id', validateJWT, async (req, res) => {
+    const ownerId = req.user.id;
+    const listId = req.params.id;
 
-     try {
-         const query = {
-             where: {
-                 id: listId,
-                 owner: ownerId
-             }
-         };
+    try {
+        const query = {
+            where: {
+                id: listId,
+                owner_id: ownerId
+            }
+        };
 
-         await ListModel.destroy(query);
-         res.status(200).json({ msg: "List has been Removed"});
-     } catch (err) {
-         res.status(500).json({error: err})
-     }
- })
+        await ListModel.destroy(query);
+        res.status(200).json({ msg: "Item has been removed from list"});
+    } catch (err) {
+        res.status(500).json({error: err})
+    }
+})
 
 
 

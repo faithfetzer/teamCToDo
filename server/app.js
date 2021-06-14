@@ -8,25 +8,27 @@ app.use(Express.json());
 
 const controllers = require('./controllers');
 
-
-app.use(require('./middleware/headers'));
-app.use(require('./middleware/validateSession'));
-
-app.use('/list', controllers.listController);
-app.use('/user', controllers.userController)
-
-
-
 app.use('/test', (req, res) => {
     res.send('test message')
 });
+
+app.use(require('./middleware/headers'));
+app.use('/user', controllers.userController)
+
+app.use(require('./middleware/validateSession'));
+
+app.use('/list', controllers.listController);
+
+
 
 // app.listen(process.env.PORT, () => {
 //     console.log(`[Server]: App is listening on ${process.env.PORT}`);
 // })
 
 dbConnection.authenticate()
-    .then(() => dbConnection.sync())
+    //.then(() => dbConnection.sync({force: true}))
+    // run the above line one time, this will delete the table you have, then comment it out and use the below line
+    // .then(() => dbConnection.sync())
     .then(() =>{
         app.listen(process.env.PORT, ()=>{
             console.log(`[Server]: App is listening on ${process.env.PORT}.`);
