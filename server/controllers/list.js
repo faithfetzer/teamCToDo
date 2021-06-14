@@ -131,7 +131,7 @@ router.delete('/delete/:id', validateJWT, async (req, res) => {
         const query = {
             where: {
                 id: listId,
-                owner_id: ownerId
+                owner_id: ownerId,
             }
         };
 
@@ -142,8 +142,29 @@ router.delete('/delete/:id', validateJWT, async (req, res) => {
     }
 })
 
+/* 
+=========================================
+    Sort by Important
+=========================================
+*/
 
-
+router.get('/important', validateJWT, async (req, res) => {
+    let { id } = req.user;
+    try {
+        const userImportant = await ListModel.findAll({
+            where: {
+            user_id: id,
+            important: true,
+        }
+        });
+        res.status(200).json({
+            msg: `These are the important items`,
+            userImportant,
+        });
+    } catch (err) {
+        res.status(500).json({error: err})
+    }
+})
 
 
 
