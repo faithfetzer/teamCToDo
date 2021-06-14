@@ -4,8 +4,12 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // const sequelize = new Sequelize(process.env.DATABASE_URL);
 =======
+=======
+
+>>>>>>> d123a63318cf58db645df860e65c2f57f9761e94
 // const sequelize = new Sequelize(process.env.DATABASE_URL, {
 //     dialect: 'postgres',
 //     dialectOptions: {
@@ -15,5 +19,7 @@ const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
 
 const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
 
+
+    //const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
 
 module.exports = sequelize;
