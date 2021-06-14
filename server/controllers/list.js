@@ -90,7 +90,7 @@ router.get('/', validateJWT, async (req, res) => {
 ==============================
 */
 router.put('/update/:entryId', validateJWT, async (req, res) => {
-    const {name, date, timedue, description, duration, completed} = req.body;
+    const {name, date, timedue, description, duration, completed, important} = req.body;
     const listId = req.params.entryId;
     const userId = req.user.id;
 
@@ -107,7 +107,8 @@ router.put('/update/:entryId', validateJWT, async (req, res) => {
         timedue: timedue,
         description: description,
         duration: duration,
-        completed: completed
+        completed: completed,
+        important: important
     };
     try {
         const update = await ListModel.update(updateList, query);
