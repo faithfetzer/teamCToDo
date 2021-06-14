@@ -5,6 +5,7 @@ const { UserModel } = require('../models');
 
 const validateJWT = async (req, res, next) => {
     console.log(req.headers)
+    console.log(req.body);
     if (req.method == "OPTIONS") {
         next();
     } else if (req.headers.authorization) {

@@ -132,7 +132,7 @@ router.delete('/delete/:id', validateJWT, async (req, res) => {
         const query = {
             where: {
                 id: listId,
-                owner_id: ownerId
+                owner_id: ownerId,
             }
         };
 
@@ -143,8 +143,71 @@ router.delete('/delete/:id', validateJWT, async (req, res) => {
     }
 })
 
+/* 
+==============================
+    SORT BY COMPLETED
+    Sort by Important
+*/
 
+router.get('/important', validateJWT, async (req, res) => {
+    let { id } = req.user;
+    try {
+        const userImportant = await ListModel.findAll({
+            where: {
+            owner_id: id,
+            important: true,
+        }
+        });
+        res.status(200).json({
+            msg: `These are the important items`,
+            userImportant,
+        });
+    } catch (err) {
+        res.status(500).json({error: err})
+    }
+})
 
+router.get('/completed', validateJWT, async (req, res) => {
+    let { id } = req.user;
+    try {
+        const userCompleted = await ListModel.findAll({
+            where: {
+            owner_id: id,
+            completed: true
+        }
+        });
+        res.status(200).json({
+            msg: `here are completed items`,
+            userCompleted
+        })
+    } catch (err) {
+        res.status(500).json({error: err})
+    }
+})
+
+/* 
+=========================================
+    Sort by Completed
+=========================================
+*/
+
+router.get('/completed', validateJWT, async (req, res) => {
+    let { id } = req.user;
+    try {
+        const userCompleted = await ListModel.findAll({
+            where: {
+            owner_id: id,
+            completed: true
+        }
+        });
+        res.status(200).json({
+            msg: `here are completed items`,
+            userCompleted
+        })
+    } catch (err) {
+        res.status(500).json({error: err})
+    }
+})
 
 
 
