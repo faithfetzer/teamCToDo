@@ -3,6 +3,8 @@ const {UserModel} = require("../models");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { UniqueConstraintError, ValidationError } = require('sequelize');
+const validateJWT = require('../middleware/validateSession');
+
 
 // build user components
 // signup
@@ -69,7 +71,7 @@ router.post('/login', async(req,res) => {
                 let token = jwt.sign(
                     {id: loginUser.id},
                     process.env.JWT_SECRET,
-                     {expiresIn: 60 * 60 * 24}
+                     {expiresIn: 60 * 60 * 12}
                 );
                 res.status(200).json({
                     user: loginUser,
@@ -92,6 +94,39 @@ router.post('/login', async(req,res) => {
         })
     }
 });
+
+// NEEDS WORK- not seeing userID variable and defaulting to incorrect email due to it seeing userToDelete as falsey
+// router.delete('/delete', validateJWT, async(req,res) => {
+//     const {email, password} = req.body;
+//     const userID = req.user.id;
+//     console.log('id', req.user.id)
+//     try {
+//         const {userToDelete} = await UserModel.findOne({
+//             where: {id: userID}
+//         })
+//         console.log(userToDelete)
+//         if(userToDelete) {
+//             let passwordComparison = await bcrypt.compare(password, userToDelete.password);
+//             if(passwordComparison) {
+//                 await UserModel.destroy(userToDelete);
+//                 res.status(200).json({ msg: "User Account has been deleted"});
+//             } else {
+//                 res.status(401).json({
+//                     msg: `Incorrect password`
+//                 })
+//             }
+//         }else {
+//             res.status(401).json({
+//                 msg: `Incorrect email`
+//             })
+//         }
+//     } catch (err) {
+//         res.status(500).json({
+//             msg: `Error deleting user ${err}`
+//         })
+//     }
+// });
+
 
 module.exports = router;
 
