@@ -26,9 +26,9 @@ app.use('/list', controllers.listController);
 // })
 
 dbConnection.authenticate()
-    //.then(() => dbConnection.sync({force: true}))
+   // .then(() => dbConnection.sync({force: true}))
     // run the above line one time, this will delete the table you have, then comment it out and use the below line
-    // .then(() => dbConnection.sync())
+     .then(() => dbConnection.sync())
     .then(() =>{
         app.listen(process.env.PORT, ()=>{
             console.log(`[Server]: App is listening on ${process.env.PORT}.`);
