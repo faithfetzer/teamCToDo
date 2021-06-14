@@ -12,6 +12,7 @@
   "author": "TeamC- Faith, Hope, Jessica, Raheem",
   "license": "ISC",
   "dependencies": {
+    "nodemon": "^2.0.7",
     "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",

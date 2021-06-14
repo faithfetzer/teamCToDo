@@ -21,7 +21,7 @@ app.use('/list', controllers.listController);
 
 
 
-// app.listen(process.env.PORT, () => {
+ 
 //     console.log(`[Server]: App is listening on ${process.env.PORT}`);
 // })
 

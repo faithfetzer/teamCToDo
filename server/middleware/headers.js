@@ -7,5 +7,3 @@ const headers = async (req, res, next) =>  {
 }
 
 module.exports= headers;
-
-// i copied and pasted this because it is my understanding that it is what all thigns need for the end points we are using- we can edit if necessary- FF

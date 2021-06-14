@@ -30,7 +30,7 @@ router.post('/register', async (req, res) => {
             process.env.JWT_SECRET,
             {expiresIn: 60 * 60 * 12}
         )
-        
+
         res.status(201).json({
             msg: 'User Registered!',
             user: user,
@@ -126,7 +126,3 @@ router.post('/login', async(req,res) => {
 //         })
 //     }
 // });
-
-
-module.exports = router;
-
