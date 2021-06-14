@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const { UserModel } = require('../models');
 
 const validateJWT = async (req, res, next) => {
+    console.log(req.body);
     if (req.method == "OPTIONS") {
         next();
     } else if (req.headers.authorization) {

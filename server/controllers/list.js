@@ -90,7 +90,7 @@ router.get('/', validateJWT, async (req, res) => {
 ==============================
 */
 router.put('/update/:entryId', validateJWT, async (req, res) => {
-    const {name, date, timedue, description, duration, completed} = req.body;
+    const {name, date, timedue, description, duration, completed, important} = req.body;
     const listId = req.params.entryId;
     const userId = req.user.id;
 
@@ -107,7 +107,8 @@ router.put('/update/:entryId', validateJWT, async (req, res) => {
         timedue: timedue,
         description: description,
         duration: duration,
-        completed: completed
+        completed: completed,
+        important: important
     };
     try {
         const update = await ListModel.update(updateList, query);
@@ -131,7 +132,7 @@ router.delete('/delete/:id', validateJWT, async (req, res) => {
         const query = {
             where: {
                 id: listId,
-                owner_id: ownerId
+                owner_id: ownerId,
             }
         };
 
@@ -142,9 +143,47 @@ router.delete('/delete/:id', validateJWT, async (req, res) => {
     }
 })
 
+/* 
+==============================
+    SORT BY COMPLETED
+    Sort by Important
+*/
 
+router.get('/important', validateJWT, async (req, res) => {
+    let { id } = req.user;
+    try {
+        const userImportant = await ListModel.findAll({
+            where: {
+            user_id: id,
+            important: true,
+        }
+        });
+        res.status(200).json({
+            msg: `These are the important items`,
+            userImportant,
+        });
+    } catch (err) {
+        res.status(500).json({error: err})
+    }
+})
 
-
+router.get('/completed', validateJWT, async (req, res) => {
+    let { id } = req.user;
+    try {
+        const userCompleted = await ListModel.findAll({
+            where: {
+            owner_id: id,
+            completed: true
+        }
+        });
+        res.status(200).json({
+            msg: `here are completed items`,
+            userCompleted
+        })
+    } catch (err) {
+        res.status(500).json({error: err})
+    }
+})
 
 
 
