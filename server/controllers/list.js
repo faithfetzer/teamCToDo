@@ -153,7 +153,7 @@ router.get('/important', validateJWT, async (req, res) => {
     try {
         const userImportant = await ListModel.findAll({
             where: {
-            user_id: id,
+            owner_id: id,
             important: true,
         }
         });
