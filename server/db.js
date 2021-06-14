@@ -1,5 +1,11 @@
 require('dotenv').config()
 const Sequelize = require('sequelize');
+<<<<<<< HEAD
+=======
+
+
+const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
+>>>>>>> cd1a4d3cd498cbbfd8723bb2d70bdffb61b5db1d
 
 const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
 
@@ -26,6 +32,9 @@ const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
 
 
 
+<<<<<<< HEAD
     //const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
 
+=======
+>>>>>>> cd1a4d3cd498cbbfd8723bb2d70bdffb61b5db1d
 module.exports = sequelize;
