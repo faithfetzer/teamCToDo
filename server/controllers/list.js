@@ -144,9 +144,13 @@ router.delete('/delete/:id', validateJWT, async (req, res) => {
 })
 
 /* 
-==============================
-    SORT BY COMPLETED
+
+
+
+=========================================
     Sort by Important
+=========================================
+
 */
 
 router.get('/important', validateJWT, async (req, res) => {
@@ -167,11 +171,13 @@ router.get('/important', validateJWT, async (req, res) => {
     }
 })
 
+
 /* 
 =========================================
     Sort by Completed
 =========================================
 */
+
 
 router.get('/completed', validateJWT, async (req, res) => {
     let { id } = req.user;
