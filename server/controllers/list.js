@@ -144,9 +144,19 @@ router.delete('/delete/:id', validateJWT, async (req, res) => {
 })
 
 /* 
+<<<<<<< HEAD
 =========================================
     Sort by Important
 =========================================
+=======
+
+
+
+=========================================
+    Sort by Important
+=========================================
+
+>>>>>>> 5b4138f94adccb45a955e63f6ad1e33b5bcc60bd
 */
 
 router.get('/important', validateJWT, async (req, res) => {
@@ -154,7 +164,7 @@ router.get('/important', validateJWT, async (req, res) => {
     try {
         const userImportant = await ListModel.findAll({
             where: {
-            user_id: id,
+            owner_id: id,
             important: true,
         }
         });
@@ -166,6 +176,14 @@ router.get('/important', validateJWT, async (req, res) => {
         res.status(500).json({error: err})
     }
 })
+
+
+/* 
+=========================================
+    Sort by Completed
+=========================================
+*/
+
 
 router.get('/completed', validateJWT, async (req, res) => {
     let { id } = req.user;
@@ -184,6 +202,7 @@ router.get('/completed', validateJWT, async (req, res) => {
         res.status(500).json({error: err})
     }
 })
+
 
 
 
