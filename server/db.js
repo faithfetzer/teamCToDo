@@ -6,16 +6,7 @@ const Sequelize = require('sequelize');
 
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
->>>>>>> c6c7abf88487e12871278722dff307186ed85e8f
-=======
-
-=======
-const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
->>>>>>> 177510bf4678df84e86bc61847376cf9f067d379
 
 
 
