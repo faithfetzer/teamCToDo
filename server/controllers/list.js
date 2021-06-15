@@ -162,10 +162,8 @@ router.get('/important', validateJWT, async (req, res) => {
             important: true,
         }
         });
-        res.status(200).json({
-            msg: `These are the important items`,
-            userImportant,
-        });
+        console.log(userImportant)
+        res.status(200).json(userImportant);
     } catch (err) {
         res.status(500).json({error: err})
     }
@@ -188,10 +186,7 @@ router.get('/completed', validateJWT, async (req, res) => {
             completed: true
         }
         });
-        res.status(200).json({
-            msg: `here are completed items`,
-            userCompleted
-        })
+        res.status(200).json(userCompleted)
     } catch (err) {
         res.status(500).json({error: err})
     }
