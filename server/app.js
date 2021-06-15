@@ -11,6 +11,7 @@ const controllers = require('./controllers');
 app.use('/test', (req, res) => {
     res.send('test message')
 });
+
 app.use(require('./middleware/headers'));
 
 app.use('/user', controllers.userController);

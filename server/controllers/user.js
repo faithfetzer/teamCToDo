@@ -43,7 +43,7 @@ router.post('/register', async (req, res) => {
                 msg: `Email already in use`
             });
         } else if(err instanceof ValidationError){
-            res.status(409).json({
+            res.status(410).json({
                 msg: `email or password incorrect format`,
                 err
             })
