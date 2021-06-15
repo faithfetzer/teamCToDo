@@ -24,7 +24,7 @@ const router = Express.Router();
 */
 
 router.post('/create',  validateJWT, async (req, res) => {
-    const {name, date, timedue, description, duration} = req.body;
+    const {name, date, timedue, description, duration, important} = req.body;
     const {id} = req.user;
     const listEntry = {
         name :name,
@@ -33,7 +33,7 @@ router.post('/create',  validateJWT, async (req, res) => {
         description: description,
         duration: duration,
         completed: false,
-        important: false,
+        important: important,
         owner_id: id
     }
     // console.log(req.user.id, req.body, listEntry)
@@ -76,6 +76,7 @@ router.get('/', validateJWT, async (req, res) => {
         const userList = await ListModel.findAll({
             where: {
             owner_id: id,
+            completed: false
         }
         });
         res.status(200).json(userList);
