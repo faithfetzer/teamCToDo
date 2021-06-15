@@ -2,14 +2,11 @@ require('dotenv').config()
 const Sequelize = require('sequelize');
 
 
-//const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
 
 
 
 
-
-
-const sequelize = new Sequelize(process.env.DATABASE_URL);
+const sequelize = new Sequelize(process.env.DATABASE_URL_lOCAL);
 
 
 
@@ -23,7 +20,7 @@ const sequelize = new Sequelize(process.env.DATABASE_URL);
 // })
 
 // const sequelize = new Sequelize(process.env.DATABASE_URL, {
-//     dialect: 'postgres',
+//     dialect: 'postgres',-
 //     dialectOptions: {
 //         ssl: true
 //     }});
