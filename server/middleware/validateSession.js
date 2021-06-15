@@ -4,12 +4,13 @@ const jwt = require("jsonwebtoken");
 const { UserModel } = require('../models');
 
 const validateJWT = async (req, res, next) => {
+    console.log(req.headers)
     console.log(req.body);
     if (req.method == "OPTIONS") {
         next();
     } else if (req.headers.authorization) {
         const { authorization } = req.headers;
-         console.log("authorization -->", authorization);
+        // console.log("authorization -->", authorization);
 
         const payload = authorization ? jwt.verify( authorization, process.env.JWT_SECRET): undefined;
             // console.log("payload -->", payload);
@@ -21,7 +22,7 @@ const validateJWT = async (req, res, next) => {
             if (foundUser) {
                 // console.log("request -->", req);
                 req.user = foundUser;
-                
+
                 next();
             } else {
                 res.status(400).send({ message: "Not Authorized" });
@@ -34,4 +35,4 @@ const validateJWT = async (req, res, next) => {
     }
 };
 
-module.exports = validateJWT;
+module.exports = validateJWT
