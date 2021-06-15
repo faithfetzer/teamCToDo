@@ -5,7 +5,6 @@ const app = Express();
 const dbConnection = require('./db');
 
 app.use(Express.json());
-
 const controllers = require('./controllers');
 
 app.use('/test', (req, res) => {

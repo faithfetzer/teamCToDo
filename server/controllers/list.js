@@ -144,11 +144,6 @@ router.delete('/delete/:id', validateJWT, async (req, res) => {
 })
 
 /* 
-<<<<<<< HEAD
-=========================================
-    Sort by Important
-=========================================
-=======
 
 
 
@@ -156,7 +151,6 @@ router.delete('/delete/:id', validateJWT, async (req, res) => {
     Sort by Important
 =========================================
 
->>>>>>> 5b4138f94adccb45a955e63f6ad1e33b5bcc60bd
 */
 
 router.get('/important', validateJWT, async (req, res) => {
