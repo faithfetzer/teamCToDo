@@ -7,6 +7,10 @@ const sequelize = new Sequelize(process.env.DATABASE_URL_lOCAL);
 
 
 
+<<<<<<< HEAD
+=======
+const sequelize = new Sequelize(process.env.DATABASE_URL_LOCAL);
+>>>>>>> c6c7abf88487e12871278722dff307186ed85e8f
 
 
 
