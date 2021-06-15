@@ -95,17 +95,17 @@ router.post('/login', async(req,res) => {
     }
 });
 
-// NEEDS WORK- not seeing userID variable and defaulting to incorrect email due to it seeing userToDelete as falsey
+// NEEDS WORK- not seeing userID variable and defaulting to incorrect email due to it seeing userToDelete as falsey- FF
 // router.delete('/delete', validateJWT, async(req,res) => {
 //     const {email, password} = req.body;
 //     const userID = req.user.id;
 //     console.log('id', req.user.id)
 //     try {
 //         const {userToDelete} = await UserModel.findOne({
-//             where: {id: userID}
+//             where: {id: userID, email : email}
 //         })
-//         console.log(userToDelete)
-//         if(userToDelete) {
+//         console.log(userToDelete);
+//          if(userToDelete) {
 //             let passwordComparison = await bcrypt.compare(password, userToDelete.password);
 //             if(passwordComparison) {
 //                 await UserModel.destroy(userToDelete);
@@ -114,8 +114,8 @@ router.post('/login', async(req,res) => {
 //                 res.status(401).json({
 //                     msg: `Incorrect password`
 //                 })
-//             }
-//         }else {
+//              }
+//          } else {
 //             res.status(401).json({
 //                 msg: `Incorrect email`
 //             })
@@ -126,3 +126,6 @@ router.post('/login', async(req,res) => {
 //         })
 //     }
 // });
+
+
+module.exports = router
