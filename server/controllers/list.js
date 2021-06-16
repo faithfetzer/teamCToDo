@@ -76,6 +76,7 @@ router.get('/', validateJWT, async (req, res) => {
         const userList = await ListModel.findAll({
             where: {
             owner_id: id,
+            completed: false
         }
         });
         res.status(200).json(userList);
