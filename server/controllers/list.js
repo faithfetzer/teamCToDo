@@ -115,6 +115,7 @@ router.put('/update/:entryId', validateJWT, async (req, res) => {
         const update = await ListModel.update(updateList, query);
         res.status(200).json(update);
     } catch (err) {
+        console.log(err)
         res.status(500).json({error: err})
     }
 
