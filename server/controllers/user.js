@@ -1,10 +1,9 @@
 const router = require("express").Router();
-const { UserModel } = require("../models");
+const {UserModel} = require("../models");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { UniqueConstraintError, ValidationError } = require('sequelize');
 const validateJWT = require('../middleware/validateSession');
-const User = require("../models/user");
 
 
 // build user components
@@ -17,19 +16,19 @@ const User = require("../models/user");
 // !Register endpoint THIS IS DONE AND WORKS TESTING HAS BEEN DONE
 
 router.post('/register', async (req, res) => {
-    let { firstName, lastName, email, password } = req.body
+    let {firstName, lastName, email, password} = req.body
     console.log(req.body)
-    try {
+    try{
         const user = await UserModel.create({
-            firstName: firstName,
+            firstName:firstName,
             lastName: lastName,
             email: email,
             password: bcrypt.hashSync(password, 13)
         })
         const token = jwt.sign(
-            { id: user.id, },
+            {id: user.id,},
             process.env.JWT_SECRET,
-            { expiresIn: 60 * 60 * 12 }
+            {expiresIn: 60 * 60 * 12}
         )
 
         res.status(201).json({
@@ -39,11 +38,11 @@ router.post('/register', async (req, res) => {
         })
 
     } catch (err) {
-        if (err instanceof UniqueConstraintError) {
+        if(err instanceof UniqueConstraintError) {
             res.status(409).json({
                 msg: `Email already in use`
             });
-        } else if (err instanceof ValidationError) {
+        } else if(err instanceof ValidationError){
             res.status(410).json({
                 msg: `email or password incorrect format`,
                 err
@@ -60,19 +59,19 @@ router.post('/register', async (req, res) => {
 
 // !Login endpoint
 
-router.post('/login', async (req, res) => {
+router.post('/login', async(req,res) => {
     let { email, password } = req.body;
     try {
         let loginUser = await UserModel.findOne({
-            where: { email: email, }
+            where: {email: email,}
         })
-        if (loginUser) {
+        if(loginUser) {
             let passwordComparison = await bcrypt.compare(password, loginUser.password);
-            if (passwordComparison) {
+            if(passwordComparison) {
                 let token = jwt.sign(
-                    { id: loginUser.id },
+                    {id: loginUser.id},
                     process.env.JWT_SECRET,
-                    { expiresIn: 60 * 60 * 12 }
+                     {expiresIn: 60 * 60 * 12}
                 );
                 res.status(200).json({
                     user: loginUser,
@@ -84,7 +83,7 @@ router.post('/login', async (req, res) => {
                     msg: `Incorrect email or password`
                 })
             }
-        } else {
+        }else {
             res.status(401).json({
                 msg: `Incorrect email or password`
             })
