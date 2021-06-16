@@ -70,7 +70,7 @@ Get List by User (make later not now)
 ===============================================
 */
 
-router.get('/:id', validateJWT, async (req, res) => {
+router.get('/', validateJWT, async (req, res) => {
     let { id } = req.user;
     try {
         const userList = await ListModel.findAll({
