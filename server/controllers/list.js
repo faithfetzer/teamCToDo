@@ -162,6 +162,7 @@ router.get('/important', validateJWT, async (req, res) => {
             where: {
             owner_id: id,
             important: true,
+            completed: false
         }
         });
         console.log(userImportant)
