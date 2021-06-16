@@ -8,6 +8,4 @@ const sequelize = new Sequelize(process.env.DATABASE_URL, {
     ssl: process.env.ENVIRONMENT ==='production'
 })
 
-
-
 module.exports = sequelize;
