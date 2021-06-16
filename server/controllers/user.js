@@ -95,75 +95,38 @@ router.post('/login', async(req,res) => {
     }
 });
 
-// NEEDS WORK- not seeing userID variable and defaulting to incorrect email due to it seeing userToDelete as falsey- FF
-// router.delete('/delete', validateJWT, async(req,res) => {
-//     const {email, password} = req.body;
-//     const userID = req.user.id;
-//     console.log('id', req.user.id)
-//     try {
-//         const {userToDelete} = await UserModel.findOne({
-//             where: {id: userID, email : email}
-//         })
-//         console.log(userToDelete);
-//          if(userToDelete) {
-//             let passwordComparison = await bcrypt.compare(password, userToDelete.password);
-//             if(passwordComparison) {
-//                 await UserModel.destroy(userToDelete);
-//                 res.status(200).json({ msg: "User Account has been deleted"});
-//             } else {
-//                 res.status(401).json({
-//                     msg: `Incorrect password`
-//                 })
-//              }
-//          } else {
-//             res.status(401).json({
-//                 msg: `Incorrect email`
-//             })
-//         }
-//     } catch (err) {
-//         res.status(500).json({
-//             msg: `Error deleting user ${err}`
-//         })
-//     }
-// });
-
-
-// ! Hopes Trying out the delete  vvvvv
-
-
-// NEEDS WORK- not seeing userID variable and defaulting to incorrect email due to it seeing userToDelete as falsey- FF
-
-
-// router.delete('/:id', validateJWT, async(req,res) => {
-//     const {email, password} = req.body;
-//     const userID = req.user.id;
-//     console.log('id', req.user.id)
-//     try {
-//         const {userToDelete} = await UserModel.findOne({
-//             where: {id: userID, email : email}
-//         })
-//         console.log(userToDelete);
-//          if(userToDelete) {
-//             let passwordComparison = await bcrypt.compare(password, userToDelete.password);
-//             if(passwordComparison) {
-//                 await UserModel.destroy(userToDelete);
-//                 res.status(200).json({ msg: "User Account has been deleted"});
-//             } else {
-//                 res.status(401).json({
-//                     msg: `Incorrect password`
-//                 })
-//              }
-//          } else {
-//             res.status(401).json({
-//                 msg: `Incorrect email`
-//             })
-//         }
-//     } catch (err) {
-//         res.status(500).json({
-//             msg: `Error deleting user ${err}`
-//         })
-//     }
-// });
+router.delete('/', validateJWT, async (req, res) => {
+    const { email, password } = req.body;
+    const userID = req.user.id;
+    // console.log('id', req.user.id)
+    const userToDelete = await UserModel.findOne({
+        where: { id: userID }
+    })
+    console.log(userToDelete);
+    try {
+        if (userToDelete) {
+            let passwordComparison = await bcrypt.compare(password, userToDelete.password);
+            if (passwordComparison) {
+                const deletedUser = await UserModel.destroy({
+                    where: { id: userID }
+                })
+                res.status(200).json({ msg: "User Account has been deleted" });
+            } else {
+                res.status(401).json({
+                    msg: `Incorrect password`
+                })
+            }
+        } else {
+            res.status(401).json({
+                msg: `Incorrect email`
+            })
+        }
+    } catch (err) {
+        res.status(500).json({
+            msg: `Error deleting user ${err}`
+        })
+    }
+});
 
 
 module.exports = router
