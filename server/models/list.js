@@ -12,7 +12,7 @@ const List = db.define("list", {
     allowNull: false,
   },
   date: {
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
   },
   timedue: {
     type: DataTypes.TIME,

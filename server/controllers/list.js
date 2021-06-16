@@ -24,7 +24,7 @@ const router = Express.Router();
 */
 
 router.post('/create',  validateJWT, async (req, res) => {
-    const {name, date, timedue, description, duration, important, completed} = req.body;
+    const {name, date, timedue, description, duration, important} = req.body;
     const {id} = req.user;
     const listEntry = {
         name :name,
@@ -70,7 +70,7 @@ Get List by User (make later not now)
 ===============================================
 */
 
-router.get('/', validateJWT, async (req, res) => {
+router.get('/:id', validateJWT, async (req, res) => {
     let { id } = req.user;
     try {
         const userList = await ListModel.findAll({
